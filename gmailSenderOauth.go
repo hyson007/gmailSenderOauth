@@ -33,6 +33,10 @@ func init() {
 	ClientSecret = os.Getenv("CLIENT_SECRET")
 	AccessToken = os.Getenv("ACCESS_TOKEN")
 	RefreshToken = os.Getenv("REFRESH_TOKEN")
+	if ClientID == "" || ClientSecret == "" || AccessToken == "" || RefreshToken == "" {
+		log.Fatal("Error loading .env file")
+	}
+
 }
 
 func OAuthGmailService() {
