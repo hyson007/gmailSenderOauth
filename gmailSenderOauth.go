@@ -39,7 +39,7 @@ func init() {
 
 }
 
-func OAuthGmailService() {
+func NewOAuthGmailService() *gmail.Service {
 	config := oauth2.Config{
 		ClientID:     ClientID,
 		ClientSecret: ClientSecret,
@@ -61,13 +61,11 @@ func OAuthGmailService() {
 		log.Printf("Unable to retrieve Gmail client: %v", err)
 	}
 
-	GmailService = srv
-	if GmailService != nil {
-		fmt.Println("Email service is initialized")
-	}
+	fmt.Println("Email service is initialized")
+	return srv
 }
 
-func SendEmailOAUTH2(to string, subject string, body string) (bool, error) {
+func SendEmailOAUTH2(svc *gmail.Service, to string, subject string, body string) (bool, error) {
 
 	var message gmail.Message
 	// var body string
@@ -88,7 +86,7 @@ func SendEmailOAUTH2(to string, subject string, body string) (bool, error) {
 	message.Raw = base64.URLEncoding.EncodeToString(msg)
 
 	// Send the message
-	_, err := GmailService.Users.Messages.Send("me", &message).Do()
+	_, err := svc.Users.Messages.Send("me", &message).Do()
 	if err != nil {
 		return false, err
 	}
