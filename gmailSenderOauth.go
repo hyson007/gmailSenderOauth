@@ -67,22 +67,22 @@ func OAuthGmailService() {
 	}
 }
 
-func SendEmailOAUTH2(to string, kind string, data interface{}) (bool, error) {
+func SendEmailOAUTH2(to string, subject string, body string) (bool, error) {
 
 	var message gmail.Message
-	var body string
+	// var body string
 
 	emailTo := "To: " + to + "\r\n"
-	subject := "Subject: " + "Welcome to subscribe earth quake notification" + "\n"
+	// subject := "Subject: " + "Welcome to subscribe earth quake notification" + "\n"
 	mime := "MIME-version: 1.0;\nContent-Type: text/plain; charset=\"UTF-8\";\n\n"
 
-	if kind == "registration" {
-		body = "Hello,\n\n" + "You have subscribed to earth quake notification.\n\n" + "Thank you for using our service.\n\n" + "Earth Quake Notification Service\n" + "Kindly check the URL to confirm your subscription\n" +
-			"http://localhost:8080/verification/" + data.(string) + "\n\n" + "Regards,\n" + "Earth Quake Notification Service"
-	} else if kind == "notification" {
-		body = "Hello,\n\n" + "We have detected suspected earthquake in your interested area\n" + "Details: \n" +
-			data.(string) + "\n\n" + "Regards,\n" + "Earth Quake Notification Service"
-	}
+	// if kind == "registration" {
+	// 	body = "Hello,\n\n" + "You have subscribed to earth quake notification.\n\n" + "Thank you for using our service.\n\n" + "Earth Quake Notification Service\n" + "Kindly check the URL to confirm your subscription\n" +
+	// 		"http://localhost:8080/verification/" + data.(string) + "\n\n" + "Regards,\n" + "Earth Quake Notification Service"
+	// } else if kind == "notification" {
+	// 	body = "Hello,\n\n" + "We have detected suspected earthquake in your interested area\n" + "Details: \n" +
+	// 		data.(string) + "\n\n" + "Regards,\n" + "Earth Quake Notification Service"
+	// }
 
 	msg := []byte(emailTo + subject + mime + "\n" + body)
 	message.Raw = base64.URLEncoding.EncodeToString(msg)
