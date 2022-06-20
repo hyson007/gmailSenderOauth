@@ -78,6 +78,7 @@ func SendEmailOAUTH2(svc *gmail.Service, to string, subject string, body string)
 	// Send the message
 	_, err := svc.Users.Messages.Send("me", &message).Do()
 	if err != nil {
+		log.Println("Error sending message: " + err.Error())
 		return false, err
 	}
 	return true, nil
