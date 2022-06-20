@@ -68,7 +68,6 @@ func NewOAuthGmailService() *gmail.Service {
 func SendEmailOAUTH2(svc *gmail.Service, to string, subject string, body string) (bool, error) {
 
 	var message gmail.Message
-
 	emailTo := "To: " + to + "\r\n"
 	mime := "MIME-version: 1.0;\nContent-Type: text/plain; charset=\"UTF-8\";\n\n"
 
